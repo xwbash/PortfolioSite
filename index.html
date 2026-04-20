@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yiğit Aydın — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root[data-theme="dark"] {
+  --bg:          #08080f;
+  --bg2:         #0d0d18;
+  --bg-card:     #101020;
+  --border:      #1c1c30;
+  --border-hi:   #00ff88;
+  --text:        #d8d8e8;
+  --dim:         #606080;
+  --accent:      #00ff88;
+  --accent2:     #00ccff;
+  --accent3:     #ff6b35;
+  --scan:        rgba(0,255,136,0.025);
+  --glow:        rgba(0,255,136,0.12);
+  --phone-body:  #0a0a0a;
+  --phone-trim:  #2a2a2a;
+}
+:root[data-theme="light"] {
+  --bg:          #f2f4f8;
+  --bg2:         #e8ecf2;
+  --bg-card:     #ffffff;
+  --border:      #d0d8e4;
+  --border-hi:   #0055cc;
+  --text:        #1a1a2e;
+  --dim:         #7080a0;
+  --accent:      #0055cc;
+  --accent2:     #0099dd;
+  --accent3:     #e05520;
+  --scan:        transparent;
+  --glow:        rgba(0,85,204,0.08);
+  --phone-body:  #1a1a1a;
+  --phone-trim:  #333;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* scanlines overlay */
+body::after {
+  content:'';
+  position:fixed; inset:0;
+  background: repeating-linear-gradient(0deg, var(--scan) 0px, transparent 1px, transparent 3px);
+  pointer-events:none;
+  z-index:9000;
+}
+
+/* ───── NAV ───── */
+.navbar {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 28px;
+  border-bottom:1px solid var(--border);
+  background:var(--bg2);
+  position:sticky; top:0; z-index:500;
+  gap:16px;
+}
+.nav-logo {
+  font-size:13px; color:var(--accent); letter-spacing:2px; white-space:nowrap;
+}
+.nav-logo em { color:var(--dim); font-style:normal; }
+.cursor-blink {
+  display:inline-block; width:7px; height:13px;
+  background:var(--accent); vertical-align:middle; margin-left:2px;
+  animation:blink 1s step-end infinite;
+}
+@keyframes blink { 50%{opacity:0} }
+
+.nav-tabs { display:flex; gap:3px; flex-wrap:wrap; }
+.tab-btn {
+  padding:7px 15px;
+  background:none; border:1px solid transparent;
+  color:var(--dim); cursor:pointer;
+  font-family:inherit; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+  transition:all .18s;
+}
+.tab-btn:hover { color:var(--accent); border-color:var(--accent); }
+.tab-btn.active {
+  color:var(--accent); border-color:var(--accent);
+  background:var(--glow);
+  box-shadow:0 0 12px var(--glow);
+}
+.theme-btn {
+  padding:6px 13px;
+  background:none; border:1px solid var(--border-hi);
+  color:var(--accent); cursor:pointer;
+  font-family:inherit; font-size:10px; letter-spacing:1px;
+  transition:all .18s; white-space:nowrap;
+}
+.theme-btn:hover { background:var(--glow); }
+
+/* ───── HERO ───── */
+.hero {
+  padding:44px 28px 36px;
+  background:var(--bg2);
+  border-bottom:1px solid var(--border);
+}
+.hero-inner {
+  max-width:1200px; margin:0 auto;
+  display:flex; gap:44px; align-items:flex-start;
+}
+.profile-wrap {
+  flex-shrink:0; position:relative; margin-top:4px;
+}
+.profile-wrap::before {
+  content:''; position:absolute; inset:-4px;
+  border:1px solid var(--accent); opacity:.4;
+  pointer-events:none;
+}
+.profile-wrap::after {
+  content:'PROFILE.JPG';
+  position:absolute; bottom:-18px; left:0;
+  font-size:9px; color:var(--accent); letter-spacing:1px; opacity:.5;
+}
+.profile-img {
+  width:156px; height:156px; object-fit:cover; display:block;
+  filter:saturate(0.85) contrast(1.05);
+}
+.hero-body { flex:1; min-width:0; }
+.hero-eyebrow {
+  font-size:9px; color:var(--accent); letter-spacing:3px; opacity:.65;
+  margin-bottom:8px;
+}
+.hero-name {
+  font-family:'Space Grotesk', sans-serif;
+  font-size:38px; font-weight:700; line-height:1.05;
+  color:var(--text); margin-bottom:5px;
+}
+.hero-name .hi { color:var(--accent); }
+.hero-role {
+  font-size:11px; letter-spacing:2.5px; color:var(--accent2);
+  margin-bottom:16px;
+}
+.hero-bio {
+  font-size:12.5px; line-height:1.75; color:var(--dim);
+  max-width:640px; margin-bottom:18px;
+}
+.wip-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:5px 13px;
+  border:1px solid var(--accent3); color:var(--accent3);
+  font-size:10px; letter-spacing:1px;
+  margin-bottom:18px;
+}
+.wip-dot {
+  width:6px; height:6px; border-radius:50%;
+  background:var(--accent3);
+  animation:pulse 1.4s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+.socials { display:flex; gap:10px; margin-bottom:22px; }
+.social-a {
+  display:flex; align-items:center; gap:6px;
+  padding:6px 13px;
+  border:1px solid var(--border); color:var(--dim);
+  text-decoration:none; font-size:10px; letter-spacing:1px;
+  transition:all .18s;
+}
+.social-a:hover { border-color:var(--accent); color:var(--accent); box-shadow:0 0 8px var(--glow); }
+.social-a svg { flex-shrink:0; }
+
+.exp-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+  gap:6px; margin-bottom:18px;
+}
+.exp-card {
+  padding:9px 12px 9px 22px;
+  border:1px solid var(--border); background:var(--bg-card);
+  position:relative;
+}
+.exp-card::before { content:'>'; position:absolute; left:8px; top:9px; color:var(--accent); font-size:11px; }
+.exp-co  { font-size:11px; color:var(--accent); }
+.exp-rol { font-size:10px; color:var(--dim); margin-top:1px; }
+.exp-dur { font-size:9px; color:var(--accent3); margin-top:1px; }
+
+.skills-row { display:flex; flex-wrap:wrap; gap:5px; margin-top:12px; }
+.skill {
+  padding:2px 9px; border:1px solid var(--border);
+  font-size:10px; color:var(--dim); letter-spacing:.5px;
+}
+.skill.hi { border-color:var(--accent); color:var(--accent); }
+
+/* ───── MAIN ───── */
+.main { max-width:1440px; margin:0 auto; padding:28px 28px 60px; }
+.tab-pane { display:none; }
+.tab-pane.active { display:block; }
+
+.sec-title {
+  display:flex; align-items:center; gap:12px; margin-bottom:28px;
+}
+.sec-title h2 { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); white-space:nowrap; }
+.sec-title::after { content:''; flex:1; height:1px; background:var(--border); }
+
+.sub-title {
+  font-size:9px; letter-spacing:2px; text-transform:uppercase;
+  color:var(--accent2); padding:5px 0;
+  border-bottom:1px solid var(--border); margin-bottom:14px;
+}
+.subsec { margin-bottom:40px; }
+
+/* ───── PHONE GRID ───── */
+.phone-grid {
+  display:flex; flex-wrap:wrap; gap:28px;
+  justify-content:flex-start;
+}
+.phone-wrap {
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+}
+.phone-label {
+  font-size:9px; letter-spacing:1.5px; color:var(--dim);
+  text-transform:uppercase; text-align:center; max-width:260px;
+}
+
+.phone {
+  width:260px;
+  background:var(--phone-body);
+  border:2px solid var(--phone-trim);
+  border-radius:34px;
+  padding:14px 9px 9px;
+  box-shadow:
+    0 0 0 1px #000,
+    0 8px 32px rgba(0,0,0,.6),
+    0 0 24px var(--glow);
+  position:relative;
+}
+.phone-notch {
+  width:56px; height:5px; background:#1e1e1e;
+  border-radius:3px; margin:0 auto 10px;
+}
+.phone-screen {
+  width:100%; height:480px;
+  border:none; border-radius:3px; display:block;
+  background:#000;
+}
+/* ── blurred letterbox video wrapper ── */
+.pvw {
+  position:relative; width:100%; height:480px;
+  overflow:hidden; border-radius:3px; background:#000;
+}
+.pvw-bg {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover;
+  filter:blur(14px) saturate(0.55) brightness(0.4);
+  transform:scale(1.12);
+  pointer-events:none; z-index:0;
+}
+.pvw-main {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:contain; z-index:1;
+}
+.phone-home {
+  width:34px; height:34px;
+  border:2px solid #2a2a2a; border-radius:50%;
+  margin:9px auto 0;
+}
+
+/* ── play thumb ── */
+.play-thumb {
+  width:100%; height:480px; border-radius:3px;
+  background:#0d0d0d; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  cursor:pointer; gap:8px;
+  transition:background .2s;
+}
+.play-thumb:hover { background:#141420; }
+.play-thumb svg { opacity:.7; }
+.play-thumb span { font-size:10px; letter-spacing:1.5px; color:var(--accent); }
+.play-thumb small { font-size:9px; color:var(--dim); letter-spacing:1px; }
+
+/* ───── IMAGE GRID ───── */
+.img-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:8px; margin-bottom:20px;
+}
+.img-card {
+  border:1px solid var(--border); overflow:hidden;
+  aspect-ratio:1; cursor:pointer; transition:border-color .18s;
+  background:#000;
+}
+.img-card:hover { border-color:var(--accent); }
+.img-card img { width:100%; height:100%; object-fit:cover; display:block; }
+
+/* ───── LIGHTBOX ───── */
+.lightbox {
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,.92); z-index:2000;
+  align-items:center; justify-content:center;
+}
+.lightbox.open { display:flex; }
+.lightbox img { max-width:90vw; max-height:90vh; border:1px solid var(--border); }
+.lightbox-close {
+  position:absolute; top:16px; right:20px;
+  background:none; border:1px solid var(--accent);
+  color:var(--accent); padding:4px 12px; cursor:pointer;
+  font-family:inherit; font-size:11px; letter-spacing:1px;
+}
+
+/* ───── PLAYABLE MODAL ───── */
+.plymodal {
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,.93); z-index:1500;
+  align-items:center; justify-content:center;
+}
+.plymodal.open { display:flex; }
+.plymodal-inner {
+  position:relative; display:flex; flex-direction:column;
+  align-items:center; gap:14px;
+}
+.plymodal-close {
+  position:absolute; top:-38px; right:0;
+  background:none; border:1px solid var(--accent);
+  color:var(--accent); padding:4px 12px; cursor:pointer;
+  font-family:inherit; font-size:11px; letter-spacing:1px;
+}
+.plymodal-close:hover { background:var(--glow); }
+.plymodal-phone {
+  width:310px;
+  background:var(--phone-body);
+  border:2px solid #444;
+  border-radius:38px;
+  padding:16px 11px 11px;
+  box-shadow:0 0 40px rgba(0,255,136,.18);
+}
+.plymodal-phone .phone-notch { width:64px; height:6px; background:#1e1e1e; border-radius:3px; margin:0 auto 11px; }
+.plymodal-phone .phone-home  { width:38px; height:38px; border:2px solid #2a2a2a; border-radius:50%; margin:11px auto 0; }
+.plymodal-iframe {
+  width:100%; height:554px;
+  border:none; border-radius:3px; display:block;
+}
+.plymodal-label { font-size:10px; letter-spacing:1.5px; color:var(--dim); }
+
+/* ───── GAMES GRID ───── */
+.games-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
+  gap:14px;
+}
+.game-card {
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+  padding:18px 10px 14px;
+  border:1px solid var(--border); background:var(--bg-card);
+  text-decoration:none; color:var(--text);
+  transition:border-color .18s, box-shadow .18s, transform .18s;
+  cursor:pointer; position:relative;
+}
+.game-card:hover {
+  border-color:var(--accent);
+  box-shadow:0 0 18px var(--glow);
+  transform:translateY(-2px);
+}
+.game-icon {
+  width:88px; height:88px; border-radius:18px;
+  object-fit:cover; display:block;
+  box-shadow:0 4px 12px rgba(0,0,0,.4);
+}
+.game-name {
+  font-size:10px; letter-spacing:.5px;
+  color:var(--text); text-align:center; line-height:1.4;
+}
+.game-store {
+  font-size:8px; color:var(--dim); letter-spacing:1.5px;
+  text-transform:uppercase; text-align:center;
+}
+.game-store.ios  { color:var(--accent2); }
+.game-store.gp   { color:var(--accent3); }
+
+/* ───── RESPONSIVE ───── */
+@media (max-width:760px) {
+  .hero-inner { flex-direction:column; gap:20px; }
+  .navbar { flex-wrap:wrap; }
+  .phone { width:220px; }
+  .phone-screen, .pvw, .play-thumb { height:400px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar">
+  <div class="nav-logo">&gt; <em>YIGIT_AYDIN</em>.exe<span class="cursor-blink"></span></div>
+  <div class="nav-tabs">
+    <button class="tab-btn active" data-tab="games">Games</button>
+    <button class="tab-btn" data-tab="playable-ads">Playable Ads</button>
+    <button class="tab-btn" data-tab="marketing-art">Marketing Art</button>
+    <button class="tab-btn" data-tab="shaders">Shaders</button>
+    <button class="tab-btn" data-tab="blender">Blender</button>
+    <button class="tab-btn" data-tab="after-effects">After Effects</button>
+  </div>
+  <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">[ LIGHT MODE ]</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="profile-wrap">
+      <img class="profile-img" src="ProfilePhoto.jpg" alt="Yiğit Aydın">
+    </div>
+    <div class="hero-body">
+      <div class="hero-eyebrow">// portfolio.exe --user yigit_aydin</div>
+      <h1 class="hero-name">Yiğit <span class="hi">Aydın</span></h1>
+      <div class="hero-role">GAME DEVELOPER &nbsp;·&nbsp; TECH ARTIST &nbsp;·&nbsp; PLAYABLE ADS</div>
+      <p class="hero-bio">
+        Started coding at 13, entered the industry at 18. My game dev journey began in Unity — 4+ years building
+        casual mobile games, playable ads, shaders, and marketing creatives for studios including
+        Voodoo, Ruby Games (Rovio-Sega Studio), and Rune Games. I work across the full pipeline: from Shader Graph and
+        editor tools in Unity to Blender simulations and After Effects motion design.
+        Currently building a personal CO-OP Steam project.
+      </p>
+      <div class="wip-badge">
+        <span class="wip-dot"></span>
+        CURRENTLY WORKING ON: Personal CO-OP Steam Project
+      </div>
+      <div class="socials">
+        <a class="social-a" href="https://www.linkedin.com/in/yigitaydn/" target="_blank" rel="noopener">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LINKEDIN
+        </a>
+        <a class="social-a" href="https://github.com/xwbash" target="_blank" rel="noopener">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GITHUB
+        </a>
+      </div>
+      <div class="exp-grid">
+        <div class="exp-card"><div class="exp-co">Ela Game Studio</div><div class="exp-rol">Senior Generalist</div><div class="exp-dur">10 months</div></div>
+        <div class="exp-card"><div class="exp-co">Voodoo</div><div class="exp-rol">Playable Developer</div><div class="exp-dur">8 months</div></div>
+        <div class="exp-card"><div class="exp-co">Rune Games</div><div class="exp-rol">Game Developer · Tech Artist</div><div class="exp-dur">10 months</div></div>
+        <div class="exp-card"><div class="exp-co">Ruby Games Studio <span style="color:var(--dim);font-size:9px">(Rovio-Sega Studio)</span></div><div class="exp-rol">Game Dev · Playable Ads · Marketing</div><div class="exp-dur">2 years</div></div>
+        <div class="exp-card"><div class="exp-co">Uncosoft</div><div class="exp-rol">Game Developer</div><div class="exp-dur">6 months</div></div>
+        <div class="exp-card"><div class="exp-co">WeBold Creative</div><div class="exp-rol">Lead Motion Designer</div><div class="exp-dur">6 months</div></div>
+      </div>
+      <div class="skills-row">
+        <span class="skill hi">Unity</span>
+        <span class="skill hi">Cocos Creator</span>
+        <span class="skill hi">C#</span>
+        <span class="skill hi">Shader Graph</span>
+        <span class="skill">Blender 3D</span>
+        <span class="skill">After Effects</span>
+        <span class="skill">TypeScript</span>
+        <span class="skill">C++</span>
+        <span class="skill">Python</span>
+        <span class="skill">Unreal Engine</span>
+        <span class="skill">Cocos2D-X</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN TABS -->
+<main class="main">
+
+  <!-- ══ PLAYABLE ADS ══ -->
+  <div class="tab-pane" id="pane-playable-ads">
+    <div class="sec-title"><h2>// Playable Ads</h2></div>
+
+    <div class="subsec">
+      <div class="sub-title">INTERACTIVE DEMOS — tap to launch</div>
+      <div class="phone-grid">
+
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="play-thumb" onclick="openPlayable('PlayableAds/01_HSS_EP_10Meet_ 2Costumers_unityads.html','HSS — Meet 2 Customers')">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="var(--accent)"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span>HSS EP.10</span>
+              <small>MEET 2 CUSTOMERS</small>
+            </div>
+            <div class="phone-home"></div>
+          </div>
+          <div class="phone-label">HSS — Meet 2 Customers</div>
+        </div>
+
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="play-thumb" onclick="openPlayable('PlayableAds/Default Creative_unityads.html','Default Creative')">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="var(--accent)"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span>DEFAULT CREATIVE</span>
+              <small>UNITY ADS</small>
+            </div>
+            <div class="phone-home"></div>
+          </div>
+          <div class="phone-label">Default Creative</div>
+        </div>
+
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="play-thumb" onclick="openPlayable('PlayableAds/INVINCIBLE-NOTIME_unityads.html','Invincible — No Time')">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="var(--accent)"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span>INVINCIBLE</span>
+              <small>NO TIME</small>
+            </div>
+            <div class="phone-home"></div>
+          </div>
+          <div class="phone-label">Invincible — No Time</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="subsec">
+      <div class="sub-title">VIDEO SHOWCASE</div>
+      <div class="phone-grid">
+        <div class="phone-wrap">
+          <div class="phone"><div class="phone-notch"></div>
+            <video class="phone-screen-vid" controls muted loop playsinline>
+              <source src="PlayableAds/Videos/Blitz-Bingo.mov">
+            </video><div class="phone-home"></div></div>
+          <div class="phone-label">Blitz Bingo</div>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone"><div class="phone-notch"></div>
+            <video class="phone-screen-vid" controls muted loop playsinline>
+              <source src="PlayableAds/Videos/BlockJam.mov">
+            </video><div class="phone-home"></div></div>
+          <div class="phone-label">Block Jam</div>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone"><div class="phone-notch"></div>
+            <video class="phone-screen-vid" controls muted loop playsinline>
+              <source src="PlayableAds/Videos/BlockJam-1.mov">
+            </video><div class="phone-home"></div></div>
+          <div class="phone-label">Block Jam — Alt 1</div>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone"><div class="phone-notch"></div>
+            <video class="phone-screen-vid" controls muted loop playsinline>
+              <source src="PlayableAds/Videos/BlockJam-2.mov">
+            </video><div class="phone-home"></div></div>
+          <div class="phone-label">Block Jam — Alt 2</div>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone"><div class="phone-notch"></div>
+            <video class="phone-screen-vid" controls muted loop playsinline>
+              <source src="PlayableAds/Videos/CocosCreator.mp4" type="video/mp4">
+            </video><div class="phone-home"></div></div>
+          <div class="phone-label">Cocos Creator</div>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone"><div class="phone-notch"></div>
+            <video class="phone-screen-vid" controls muted loop playsinline>
+              <source src="PlayableAds/Videos/CoffeePack.mov">
+            </video><div class="phone-home"></div></div>
+          <div class="phone-label">Coffee Pack</div>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone"><div class="phone-notch"></div>
+            <video class="phone-screen-vid" controls muted loop playsinline>
+              <source src="PlayableAds/Videos/Hole.io.mov">
+            </video><div class="phone-home"></div></div>
+          <div class="phone-label">Hole.io</div>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone"><div class="phone-notch"></div>
+            <video class="phone-screen-vid" controls muted loop playsinline>
+              <source src="PlayableAds/Videos/Luna.mp4" type="video/mp4">
+            </video><div class="phone-home"></div></div>
+          <div class="phone-label">Luna</div>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone"><div class="phone-notch"></div>
+            <video class="phone-screen-vid" controls muted loop playsinline>
+              <source src="PlayableAds/Videos/MobControl.mov">
+            </video><div class="phone-home"></div></div>
+          <div class="phone-label">Mob Control</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MARKETING ART ══ -->
+  <div class="tab-pane" id="pane-marketing-art">
+    <div class="sec-title"><h2>// Marketing Art</h2></div>
+    <div class="phone-grid">
+      <div class="phone-wrap">
+        <div class="phone"><div class="phone-notch"></div>
+          <video class="phone-screen-vid" controls muted loop playsinline>
+            <source src="Marketing Art/DreamCase.mp4" type="video/mp4">
+          </video><div class="phone-home"></div></div>
+        <div class="phone-label">Dream Case</div>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone"><div class="phone-notch"></div>
+          <video class="phone-screen-vid" controls muted loop playsinline>
+            <source src="Marketing Art/HunterAssassinLava+Smoke.mp4" type="video/mp4">
+          </video><div class="phone-home"></div></div>
+        <div class="phone-label">Hunter Assassin — Lava + Smoke</div>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone"><div class="phone-notch"></div>
+          <video class="phone-screen-vid" controls muted loop playsinline>
+            <source src="Marketing Art/HunterAssassinWater.mp4" type="video/mp4">
+          </video><div class="phone-home"></div></div>
+        <div class="phone-label">Hunter Assassin — Water</div>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone"><div class="phone-notch"></div>
+          <video class="phone-screen-vid" controls muted loop playsinline>
+            <source src="Marketing Art/shiny 5 (1).mp4" type="video/mp4">
+          </video><div class="phone-home"></div></div>
+        <div class="phone-label">Shiny Effect</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SHADERS ══ -->
+  <div class="tab-pane" id="pane-shaders">
+    <div class="sec-title"><h2>// Shaders</h2></div>
+    <div class="phone-grid">
+      <div class="phone-wrap">
+        <div class="phone"><div class="phone-notch"></div>
+          <video class="phone-screen-vid" controls muted loop playsinline>
+            <source src="Shaders/1730120755222.mp4" type="video/mp4">
+          </video><div class="phone-home"></div></div>
+        <div class="phone-label">Shader Demo 01</div>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone"><div class="phone-notch"></div>
+          <video class="phone-screen-vid" controls muted loop playsinline>
+            <source src="Shaders/2024-12-16 17-15-53.mp4" type="video/mp4">
+          </video><div class="phone-home"></div></div>
+        <div class="phone-label">Shader Demo 02</div>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone"><div class="phone-notch"></div>
+          <video class="phone-screen-vid" controls muted loop playsinline>
+            <source src="Shaders/2024-12-17 13-34-33.mp4" type="video/mp4">
+          </video><div class="phone-home"></div></div>
+        <div class="phone-label">Shader Demo 03</div>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone"><div class="phone-notch"></div>
+          <video class="phone-screen-vid" controls muted loop playsinline>
+            <source src="Shaders/InGame - UI Shader.MP4" type="video/mp4">
+          </video><div class="phone-home"></div></div>
+        <div class="phone-label">In-Game UI Shader</div>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone"><div class="phone-notch"></div>
+          <video class="phone-screen-vid" controls muted loop playsinline>
+            <source src="Shaders/Island Shader.mp4" type="video/mp4">
+          </video><div class="phone-home"></div></div>
+        <div class="phone-label">Island Shader</div>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone"><div class="phone-notch"></div>
+          <video class="phone-screen-vid" controls muted loop playsinline>
+            <source src="Shaders/Light Hole Shader.mp4" type="video/mp4">
+          </video><div class="phone-home"></div></div>
+        <div class="phone-label">Light Hole Shader</div>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone"><div class="phone-notch"></div>
+          <video class="phone-screen-vid" controls muted loop playsinline>
+            <source src="Shaders/MappingDepth.mp4" type="video/mp4">
+          </video><div class="phone-home"></div></div>
+        <div class="phone-label">Mapping Depth</div>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone"><div class="phone-notch"></div>
+          <video class="phone-screen-vid" controls muted loop playsinline>
+            <source src="Shaders/My Own Shader Pack.mp4" type="video/mp4">
+          </video><div class="phone-home"></div></div>
+        <div class="phone-label">My Own Shader Pack</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ BLENDER ══ -->
+  <div class="tab-pane" id="pane-blender">
+    <div class="sec-title"><h2>// Blender</h2></div>
+
+    <div class="subsec">
+      <div class="sub-title">3D ANIMATION CLIPS</div>
+      <div class="phone-grid">
+        <div class="phone-wrap">
+          <div class="phone"><div class="phone-notch"></div>
+            <video class="phone-screen-vid" controls muted loop playsinline>
+              <source src="Blender/Models - Scenes/blade runner - created in blender.mp4" type="video/mp4">
+            </video><div class="phone-home"></div></div>
+          <div class="phone-label">Blade Runner Scene</div>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone"><div class="phone-notch"></div>
+            <video class="phone-screen-vid" controls muted loop playsinline>
+              <source src="Blender/Models - Scenes/Kayıt 2025-01-15 113951.mp4" type="video/mp4">
+            </video><div class="phone-home"></div></div>
+          <div class="phone-label">Scene Recording</div>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone"><div class="phone-notch"></div>
+            <video class="phone-screen-vid" controls muted loop playsinline>
+              <source src="Blender/Models - Scenes/Spell Book Model.avi">
+            </video><div class="phone-home"></div></div>
+          <div class="phone-label">Spell Book Model</div>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone"><div class="phone-notch"></div>
+            <video class="phone-screen-vid" controls muted loop playsinline>
+              <source src="Blender/Models - Scenes/bmo0001-0250.avi">
+            </video><div class="phone-home"></div></div>
+          <div class="phone-label">BMO Animation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsec">
+      <div class="sub-title">MODELS &amp; SCENES — 3D RENDERS</div>
+      <div class="img-grid">
+        <div class="img-card" onclick="openLightbox(this)"><img src="Blender/Models - Scenes/Abonded House.jpg"                      alt="Abandoned House" loading="lazy"></div>
+        <div class="img-card" onclick="openLightbox(this)"><img src="Blender/Models - Scenes/Angry Birds.jpg"                         alt="Angry Birds" loading="lazy"></div>
+        <div class="img-card" onclick="openLightbox(this)"><img src="Blender/Models - Scenes/Black Hole.jpg"                          alt="Black Hole" loading="lazy"></div>
+        <div class="img-card" onclick="openLightbox(this)"><img src="Blender/Models - Scenes/Blade Runner Scene.jpg"                  alt="Blade Runner Scene" loading="lazy"></div>
+        <div class="img-card" onclick="openLightbox(this)"><img src="Blender/Models - Scenes/Family Guy Scene.jpg"                    alt="Family Guy Scene" loading="lazy"></div>
+        <div class="img-card" onclick="openLightbox(this)"><img src="Blender/Models - Scenes/Family Guy Scene - Typology.jpg"         alt="Family Guy Topology" loading="lazy"></div>
+        <div class="img-card" onclick="openLightbox(this)"><img src="Blender/Models - Scenes/House.jpg"                               alt="House" loading="lazy"></div>
+        <div class="img-card" onclick="openLightbox(this)"><img src="Blender/Models - Scenes/House Scene.jpg"                         alt="House Scene" loading="lazy"></div>
+        <div class="img-card" onclick="openLightbox(this)"><img src="Blender/Models - Scenes/House Scene (First Project Blender).jpg" alt="First Blender Project" loading="lazy"></div>
+        <div class="img-card" onclick="openLightbox(this)"><img src="Blender/Models - Scenes/Low Poly House Scene.jpg"                alt="Low Poly House" loading="lazy"></div>
+        <div class="img-card" onclick="openLightbox(this)"><img src="Blender/Models - Scenes/Mushroom Green.jpg"                     alt="Mushroom Green" loading="lazy"></div>
+        <div class="img-card" onclick="openLightbox(this)"><img src="Blender/Models - Scenes/Mushroom Purple.jpg"                    alt="Mushroom Purple" loading="lazy"></div>
+        <div class="img-card" onclick="openLightbox(this)"><img src="Blender/Models - Scenes/Nature Scene.jpg"                       alt="Nature Scene" loading="lazy"></div>
+        <div class="img-card" onclick="openLightbox(this)"><img src="Blender/Models - Scenes/Portal Gun Model.jpg"                   alt="Portal Gun" loading="lazy"></div>
+        <div class="img-card" onclick="openLightbox(this)"><img src="Blender/Models - Scenes/Rick Sanchez.jpg"                       alt="Rick Sanchez" loading="lazy"></div>
+        <div class="img-card" onclick="openLightbox(this)"><img src="Blender/Models - Scenes/Spell Book Typology.jpg"                alt="Spell Book Topology" loading="lazy"></div>
+        <div class="img-card" onclick="openLightbox(this)"><img src="Blender/Models - Scenes/3D Art created by me.png"               alt="3D Art" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="subsec">
+      <div class="sub-title">SIMULATIONS</div>
+      <div class="phone-grid">
+        <div class="phone-wrap">
+          <div class="phone"><div class="phone-notch"></div>
+            <video class="phone-screen-vid" controls muted loop playsinline>
+              <source src="Blender/Simulations/Case_MAIN_VIDEO.mp4" type="video/mp4">
+            </video><div class="phone-home"></div></div>
+          <div class="phone-label">Case Main</div>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone"><div class="phone-notch"></div>
+            <video class="phone-screen-vid" controls muted loop playsinline>
+              <source src="Blender/Simulations/Cloth Simulation.mp4" type="video/mp4">
+            </video><div class="phone-home"></div></div>
+          <div class="phone-label">Cloth Simulation</div>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone"><div class="phone-notch"></div>
+            <video class="phone-screen-vid" controls muted loop playsinline>
+              <source src="Blender/Simulations/Hair Particle Simualtion.mp4" type="video/mp4">
+            </video><div class="phone-home"></div></div>
+          <div class="phone-label">Hair Particle Simulation</div>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone"><div class="phone-notch"></div>
+            <video class="phone-screen-vid" controls muted loop playsinline>
+              <source src="Blender/Simulations/Hunter Assassin 2 - Creatives (1).mp4" type="video/mp4">
+            </video><div class="phone-home"></div></div>
+          <div class="phone-label">Hunter Assassin 2 — Creative 1</div>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone"><div class="phone-notch"></div>
+            <video class="phone-screen-vid" controls muted loop playsinline>
+              <source src="Blender/Simulations/Hunter Assassin 2 - Creatives (2).mp4" type="video/mp4">
+            </video><div class="phone-home"></div></div>
+          <div class="phone-label">Hunter Assassin 2 — Creative 2</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsec">
+      <div class="sub-title">GEOMETRY NODES</div>
+      <div class="phone-grid">
+        <div class="phone-wrap">
+          <div class="phone"><div class="phone-notch"></div>
+            <video class="phone-screen-vid" controls muted loop playsinline>
+              <source src="Blender/Geometry Nodes/Column Geometry Node.MP4" type="video/mp4">
+            </video><div class="phone-home"></div></div>
+          <div class="phone-label">Column Geometry Node</div>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone"><div class="phone-notch"></div>
+            <video class="phone-screen-vid" controls muted loop playsinline>
+              <source src="Blender/Geometry Nodes/Geometry Nodes - Basics.mp4" type="video/mp4">
+            </video><div class="phone-home"></div></div>
+          <div class="phone-label">Geometry Nodes Basics</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ AFTER EFFECTS ══ -->
+  <div class="tab-pane" id="pane-after-effects">
+    <div class="sec-title"><h2>// After Effects</h2></div>
+    <div class="phone-grid">
+      <div class="phone-wrap"><div class="phone"><div class="phone-notch"></div><video class="phone-screen-vid" controls muted loop playsinline><source src="After Effects/ae (1).mp4" type="video/mp4"></video><div class="phone-home"></div></div><div class="phone-label">AE Reel 01</div></div>
+      <div class="phone-wrap"><div class="phone"><div class="phone-notch"></div><video class="phone-screen-vid" controls muted loop playsinline><source src="After Effects/ae (2).mp4" type="video/mp4"></video><div class="phone-home"></div></div><div class="phone-label">AE Reel 02</div></div>
+      <div class="phone-wrap"><div class="phone"><div class="phone-notch"></div><video class="phone-screen-vid" controls muted loop playsinline><source src="After Effects/ae (3).mp4" type="video/mp4"></video><div class="phone-home"></div></div><div class="phone-label">AE Reel 03</div></div>
+      <div class="phone-wrap"><div class="phone"><div class="phone-notch"></div><video class="phone-screen-vid" controls muted loop playsinline><source src="After Effects/ae (4).mp4" type="video/mp4"></video><div class="phone-home"></div></div><div class="phone-label">AE Reel 04</div></div>
+      <div class="phone-wrap"><div class="phone"><div class="phone-notch"></div><video class="phone-screen-vid" controls muted loop playsinline><source src="After Effects/ae (5).mp4" type="video/mp4"></video><div class="phone-home"></div></div><div class="phone-label">AE Reel 05</div></div>
+      <div class="phone-wrap"><div class="phone"><div class="phone-notch"></div><video class="phone-screen-vid" controls muted loop playsinline><source src="After Effects/ae (6).mp4" type="video/mp4"></video><div class="phone-home"></div></div><div class="phone-label">AE Reel 06</div></div>
+      <div class="phone-wrap"><div class="phone"><div class="phone-notch"></div><video class="phone-screen-vid" controls muted loop playsinline><source src="After Effects/ae (7).mp4" type="video/mp4"></video><div class="phone-home"></div></div><div class="phone-label">AE Reel 07</div></div>
+      <div class="phone-wrap"><div class="phone"><div class="phone-notch"></div><video class="phone-screen-vid" controls muted loop playsinline><source src="After Effects/ae (8).mp4" type="video/mp4"></video><div class="phone-home"></div></div><div class="phone-label">AE Reel 08</div></div>
+      <div class="phone-wrap"><div class="phone"><div class="phone-notch"></div><video class="phone-screen-vid" controls muted loop playsinline><source src="After Effects/ae (9).mp4" type="video/mp4"></video><div class="phone-home"></div></div><div class="phone-label">AE Reel 09</div></div>
+      <div class="phone-wrap"><div class="phone"><div class="phone-notch"></div><video class="phone-screen-vid" controls muted loop playsinline><source src="After Effects/ae (10).mp4" type="video/mp4"></video><div class="phone-home"></div></div><div class="phone-label">AE Reel 10</div></div>
+      <div class="phone-wrap"><div class="phone"><div class="phone-notch"></div><video class="phone-screen-vid" controls muted loop playsinline><source src="After Effects/ae (11).mp4" type="video/mp4"></video><div class="phone-home"></div></div><div class="phone-label">AE Reel 11</div></div>
+      <div class="phone-wrap"><div class="phone"><div class="phone-notch"></div><video class="phone-screen-vid" controls muted loop playsinline><source src="After Effects/Kayıt 2025-01-02 133258 (1).mp4" type="video/mp4"></video><div class="phone-home"></div></div><div class="phone-label">AE Recording</div></div>
+    </div>
+  </div>
+
+
+  <!-- ══ GAMES ══ -->
+  <div class="tab-pane active" id="pane-games">
+    <div class="sec-title"><h2>// Games</h2></div>
+    <div class="games-grid">
+
+      <a class="game-card" href="https://play.google.com/store/apps/details?id=com.rubygames.assassin" target="_blank" rel="noopener">
+        <img class="game-icon" src="https://play-lh.googleusercontent.com/PTxkeud-aHNGqo85reN70CUWs5DF0HTKNMIbM7lrxS1WdTD-G2X8X6szmD4CGlI7wg=w512-h512" alt="Hunter Assassin">
+        <div class="game-name">Hunter Assassin</div>
+        <div class="game-store gp">Google Play</div>
+      </a>
+
+      <a class="game-card" href="https://apps.apple.com/us/app/mob-control/id1562817072" target="_blank" rel="noopener">
+        <img class="game-icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ca/e4/62/cae46272-5395-e225-4b94-bd41dd2e69d4/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="Mob Control">
+        <div class="game-name">Mob Control</div>
+        <div class="game-store ios">App Store</div>
+      </a>
+
+      <a class="game-card" href="https://apps.apple.com/us/app/hole-io/id1389111413" target="_blank" rel="noopener">
+        <img class="game-icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b0/29/01/b029015e-4ba2-0ced-21b7-8a5c30c89bc0/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="Hole.io">
+        <div class="game-name">Hole.io</div>
+        <div class="game-store ios">App Store</div>
+      </a>
+
+      <a class="game-card" href="https://apps.apple.com/us/app/cup-heroes/id6469621221" target="_blank" rel="noopener">
+        <img class="game-icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/68/24/86/6824866c-582b-8cb5-4f0f-c8923462c664/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="Cup Heroes">
+        <div class="game-name">Cup Heroes</div>
+        <div class="game-store ios">App Store</div>
+      </a>
+
+      <a class="game-card" href="https://apps.apple.com/tr/app/block-jam-3d/id1618805694" target="_blank" rel="noopener">
+        <img class="game-icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ac/51/a2/ac51a240-a7e2-93ae-be40-08a0c8e26efb/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="Block Jam 3D">
+        <div class="game-name">Block Jam — 3D Block Puzzle</div>
+        <div class="game-store ios">App Store</div>
+      </a>
+
+      <a class="game-card" href="https://play.google.com/store/apps/details?id=com.rubygames.hunterassassin2" target="_blank" rel="noopener">
+        <img class="game-icon" src="https://play-lh.googleusercontent.com/OwjtzoCbovFD2rImlejDvQZ0DQBaJV462OWWCQqganRKLWS9gPNNGhhfREnmOF8NWB8=w512-h512" alt="Hunter Strike">
+        <div class="game-name">Hunter Strike</div>
+        <div class="game-store gp">Google Play</div>
+      </a>
+
+      <a class="game-card" href="https://apps.apple.com/tr/app/coffee-pack/id6475177029" target="_blank" rel="noopener">
+        <img class="game-icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/84/77/0a/84770a18-d746-233b-b4c0-d940dab5215e/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="Coffee Pack">
+        <div class="game-name">Coffee Pack</div>
+        <div class="game-store ios">App Store</div>
+      </a>
+
+      <a class="game-card" href="https://play.google.com/store/apps/details?id=com.rubygames.myrenolife" target="_blank" rel="noopener">
+        <img class="game-icon" src="https://play-lh.googleusercontent.com/cz1_Z0FNSW28-VBbLVg8okD9-E-KA6a3Pf6wsZ0GL7V93p6bJ5gL_va67kErJf2dSg=w512-h512" alt="My Renovation Life">
+        <div class="game-name">My Renovation Life</div>
+        <div class="game-store gp">Google Play</div>
+      </a>
+
+      <a class="game-card" href="https://apps.apple.com/us/app/shiny-swap-diamond-puzzle/id6757070918" target="_blank" rel="noopener">
+        <img class="game-icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/bd/9f/db/bd9fdb76-040d-2e1a-948f-82b64d2cea96/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="Shiny Swap">
+        <div class="game-name">Shiny Swap: Diamond Puzzle</div>
+        <div class="game-store ios">App Store</div>
+      </a>
+
+      <a class="game-card" href="https://apps.apple.com/us/app/my-tidy-life/id1641488141" target="_blank" rel="noopener">
+        <img class="game-icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/00/a3/ff/00a3ff1d-8045-b385-2503-e25b09c3e12f/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="My Tidy Life">
+        <div class="game-name">My Tidy Life</div>
+        <div class="game-store ios">App Store</div>
+      </a>
+
+      <a class="game-card" href="https://apps.apple.com/tr/app/sorting-stacks/id6751955027" target="_blank" rel="noopener">
+        <img class="game-icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ea/34/97/ea3497a3-bb39-ab45-a57f-13c93ca2c6fa/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="Sorting Stacks">
+        <div class="game-name">Sorting Stacks</div>
+        <div class="game-store ios">App Store</div>
+      </a>
+
+      <a class="game-card" href="https://apps.apple.com/tr/app/roll-machine/id6449462160" target="_blank" rel="noopener">
+        <img class="game-icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/9f/26/ac/9f26acbc-678b-9363-46cf-084eb5c1fb07/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="Roll Machine">
+        <div class="game-name">Roll Machine</div>
+        <div class="game-store ios">App Store</div>
+      </a>
+
+      <a class="game-card" href="https://apps.apple.com/us/app/melting-ball-3d/id1624884940" target="_blank" rel="noopener">
+        <img class="game-icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple122/v4/65/1a/48/651a4894-6ffe-caa9-8ec2-146a64edf0e7/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/512x512bb.jpg" alt="Melting Ball 3D">
+        <div class="game-name">Melting Ball 3D</div>
+        <div class="game-store ios">App Store</div>
+      </a>
+
+      <a class="game-card" href="https://apps.apple.com/tt/app/breakup-support/id1620301127" target="_blank" rel="noopener">
+        <img class="game-icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple112/v4/af/ae/0c/afae0c4b-2fb0-0660-79ad-d354576dcf00/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/512x512bb.jpg" alt="Breakup Support">
+        <div class="game-name">Breakup Support</div>
+        <div class="game-store ios">App Store</div>
+      </a>
+
+      <a class="game-card" href="https://apps.apple.com/tr/app/takeaway-coffee/id1629581328" target="_blank" rel="noopener">
+        <img class="game-icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple112/v4/08/5f/9a/085f9a47-0d3c-3eff-29e3-165669c32b3b/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/512x512bb.jpg" alt="Takeaway Coffee">
+        <div class="game-name">Takeaway Coffee</div>
+        <div class="game-store ios">App Store</div>
+      </a>
+
+      <a class="game-card" href="https://apps.apple.com/tr/app/sosyal-lig-fantasy-football/id725481540" target="_blank" rel="noopener">
+        <img class="game-icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/8f/79/aa/8f79aa3c-85a6-5fa3-f0a2-a7bd67247e56/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="Sosyal Lig">
+        <div class="game-name">Sosyal Lig — Fantasy Football</div>
+        <div class="game-store ios">App Store</div>
+      </a>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- PLAYABLE MODAL -->
+<div class="plymodal" id="plymodal">
+  <div class="plymodal-inner">
+    <button class="plymodal-close" onclick="closePly()">[ CLOSE × ]</button>
+    <div class="plymodal-phone">
+      <div class="phone-notch"></div>
+      <iframe id="plyframe" class="plymodal-iframe" src="" allowfullscreen allow="autoplay"></iframe>
+      <div class="phone-home"></div>
+    </div>
+    <div id="plylabel" class="plymodal-label"></div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">[ CLOSE × ]</button>
+  <img id="lbimg" src="" alt="">
+</div>
+
+<script>
+// ── Blurred video wrap: auto-convert .phone-screen-vid → .pvw ──
+document.querySelectorAll('.phone-screen-vid').forEach(vid => {
+  const sources = Array.from(vid.querySelectorAll('source')).map(s => ({ src: s.src || s.getAttribute('src'), type: s.type }));
+
+  const bg = document.createElement('video');
+  bg.className = 'pvw-bg';
+  bg.muted = true; bg.loop = true;
+  bg.setAttribute('playsinline', ''); bg.setAttribute('tabindex', '-1'); bg.setAttribute('aria-hidden', 'true');
+  sources.forEach(({ src, type }) => {
+    const s = document.createElement('source');
+    s.setAttribute('src', src); if (type) s.type = type;
+    bg.appendChild(s);
+  });
+
+  const wrap = document.createElement('div');
+  wrap.className = 'pvw';
+  vid.parentNode.insertBefore(wrap, vid);
+  vid.classList.remove('phone-screen-vid');
+  vid.classList.add('pvw-main');
+  wrap.appendChild(bg);
+  wrap.appendChild(vid);
+
+  vid.addEventListener('play',   () => { try { bg.currentTime = vid.currentTime; bg.play(); } catch(e){} });
+  vid.addEventListener('pause',  () => { try { bg.pause(); } catch(e){} });
+  vid.addEventListener('seeked', () => { bg.currentTime = vid.currentTime; });
+});
+
+// ── Tabs ──
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const t = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-btn[data-tab="'+t+'"]').forEach(b => b.classList.add('active'));
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    document.getElementById('pane-'+t).classList.add('active');
+    window.scrollTo({top: document.querySelector('.main').offsetTop - 60, behavior:'smooth'});
+  });
+});
+
+// ── Theme ──
+function toggleTheme() {
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', dark ? 'light' : 'dark');
+  document.getElementById('themeBtn').textContent = dark ? '[ DARK MODE ]' : '[ LIGHT MODE ]';
+}
+
+// ── Playable modal ──
+function openPlayable(src, label) {
+  document.getElementById('plyframe').src = src;
+  document.getElementById('plylabel').textContent = label;
+  document.getElementById('plymodal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closePly() {
+  document.getElementById('plymodal').classList.remove('open');
+  document.getElementById('plyframe').src = '';
+  document.body.style.overflow = '';
+}
+document.getElementById('plymodal').addEventListener('click', e => { if(e.target===e.currentTarget) closePly(); });
+
+// ── Lightbox ──
+function openLightbox(card) {
+  const img = card.querySelector('img');
+  document.getElementById('lbimg').src = img.src;
+  document.getElementById('lbimg').alt = img.alt;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── Keyboard ──
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') { closePly(); closeLightbox(); }
+});
+</script>
+</body>
+</html>
